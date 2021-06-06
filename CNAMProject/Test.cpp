@@ -4,9 +4,11 @@
 #include <opencv2/highgui.hpp>
 #include <opencv2/imgproc.hpp>
 
-using namespace cv;
-using namespace std;
 
+using namespace std;
+using namespace cv;
+
+/*
 int main() {
 
 	string path = "Resources/test.png";
@@ -15,4 +17,4 @@ int main() {
 	waitKey(0);
 	return 0;
 
-}
+}*/

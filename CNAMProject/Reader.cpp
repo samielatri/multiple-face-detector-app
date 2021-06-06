@@ -73,23 +73,29 @@ int main(void) {
 
 	cout << "Reading the image from the specified path : " << imagePath << std::endl;
 
+	Mat imageResized;
+
+	cout << image.size() << endl;
+
+	resize(image, imageResized, Size(), 0.5, 0.5);
+
 	CascadeClassifier faceCascade;
 	faceCascade.load("Resources/haarcascade_frontalface_default.xml");
 
 	if (faceCascade.empty()) { cout << "xml file not loaded" << endl; }
 
 	vector<Rect> faces;
-	faceCascade.detectMultiScale(image, faces, 1.1, 10);
+	faceCascade.detectMultiScale(imageResized, faces, 1.1, 10);
 
 	int numberOfFaces = faces.size();
 
 	cout << "number of faces = " << numberOfFaces;
 
 	for (int i = 0; i < numberOfFaces; i++) {
-		rectangle(image, faces[i].tl(), faces[i].br(), Scalar(255, 0, 0));
+		rectangle(imageResized, faces[i].tl(), faces[i].br(), Scalar(255, 0, 0));
 	}
 
-	showImage(image);
+	showImage(imageResized);
 
 
 	return EXIT_SUCCESS;

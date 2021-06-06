@@ -361,3 +361,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+./CNAMProject/Resources/*.png
+./CNAMProject/Resources/*.mp4
+./CNAMProject/Resources/*.jpg

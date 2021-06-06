@@ -4,6 +4,9 @@
 #include <opencv2/highgui.hpp>
 #include <opencv2/imgproc.hpp>
 
+#include <opencv2/objdetect.hpp>
+
+
 using namespace std;
 using namespace cv;
 
@@ -70,7 +73,24 @@ int main(void) {
 
 	cout << "Reading the image from the specified path : " << imagePath << std::endl;
 
+	CascadeClassifier faceCascade;
+	faceCascade.load("Resources/haarcascade_frontalface_default.xml");
+
+	if (faceCascade.empty()) { cout << "xml file not loaded" << endl; }
+
+	vector<Rect> faces;
+	faceCascade.detectMultiScale(image, faces, 1.1, 10);
+
+	int numberOfFaces = faces.size();
+
+	cout << "number of faces = " << numberOfFaces;
+
+	for (int i = 0; i < numberOfFaces; i++) {
+		rectangle(image, faces[i].tl(), faces[i].br(), Scalar(255, 0, 0));
+	}
+
 	showImage(image);
+
 
 	return EXIT_SUCCESS;
 }

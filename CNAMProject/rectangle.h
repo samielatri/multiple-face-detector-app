@@ -1,0 +1,9 @@
+#ifndef _RECTANGLE_H_
+#define _RECTANGLE_H_
+
+#define RECTANGLE_RGB_COLOR 255, 0, 0
+#define RECTANGLE_THICKNESS 2
+#define RECTANGLE_LINE_TYPE 8
+#define RECTANGLE_SHIFT 0
+
+#endif  /* _RECTANGLE_H_ */

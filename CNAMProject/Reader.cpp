@@ -6,6 +6,7 @@
 
 #include <opencv2/objdetect.hpp>
 #include "rectangle.h"
+#include "model.h"
 
 using namespace std;
 using namespace cv;
@@ -16,13 +17,7 @@ using namespace cv;
 
 
 
-#ifdef __unix__         
-	#define FACE_DEFINITION "Resources/haarcascade_frontalface_default.xml"
-	#define OUTPUT_FILE "output/output.jpg"
-#elif defined(_WIN32) || defined(WIN32) 
-	#define FACE_DEFINITION "Resources\\haarcascade_frontalface_default.xml"
-	#define OUTPUT_FILE "output\\output.jpg"
-#endif
+
 
 
 /*	<summary>

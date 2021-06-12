@@ -5,7 +5,7 @@
 #include <opencv2/imgproc.hpp>
 
 #include <opencv2/objdetect.hpp>
-
+#include "rectangle.h"
 
 using namespace std;
 using namespace cv;
@@ -14,10 +14,7 @@ using namespace cv;
 
 #define DEFAULT_PROMPT_MESSAGE "Enter your file path: "
 
-#define RECTANGLE_RGB_COLOR 255, 0, 0
-#define RECTANGLE_THICKNESS 2
-#define RECTANGLE_LINE_TYPE 8
-#define RECTANGLE_SHIFT 0
+
 
 #ifdef __unix__         
 	#define FACE_DEFINITION "Resources/haarcascade_frontalface_default.xml"

@@ -1,24 +1,18 @@
 #include <iostream>
+#include <stdlib.h>
 
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/highgui.hpp>
 #include <opencv2/imgproc.hpp>
-
 #include <opencv2/objdetect.hpp>
+
 #include "rectangle.h"
 #include "model.h"
+#include "image.h"
+#include "prompt.h"
 
 using namespace std;
 using namespace cv;
-
-#define INFINITE_WAIT_TIME 0
-
-#define DEFAULT_PROMPT_MESSAGE "Enter your file path: "
-
-
-
-
-
 
 /*	<summary>
 		get path from user
@@ -80,7 +74,6 @@ int main(void) {
 				cout << "Could not read the image from the specified path : " << imagePath << endl;
 				cout << "try again !" << endl;
 			}
-
 		} while (!imageIsValid);
 
 		cout << "Reading the image from the specified path : " << imagePath << endl;
@@ -91,7 +84,13 @@ int main(void) {
 		cout << "image original size : " << endl;
 		cout << image.size() << endl;
 
-		resize(image, imageResized, Size(), 0.5, 0.5);
+		resize(
+			image,
+			imageResized,
+			Size(),
+			X_SCALING_FACTOR,
+			Y_SCALING_FACTOR
+		);
 
 		cout << "image size after resize : " << endl;
 		cout << image.size() << endl;
@@ -107,7 +106,7 @@ int main(void) {
 		}
 
 		vector<Rect> faces;
-		faceCascade.detectMultiScale(imageResized, faces, 1.1, 10);
+		faceCascade.detectMultiScale(imageResized, faces);
 
 		int numberOfFaces = faces.size();
 
@@ -115,9 +114,25 @@ int main(void) {
 
 		cout << "processing for drawing rectangles on faces..." << endl;
 		for (int i = 0; i < numberOfFaces; i++) {
-			Point point1(faces[i].x, faces[i].y);	// faces[i].tl()
-			Point point2((faces[i].x + faces[i].height), (faces[i].y + faces[i].width));	// faces[i].br()
-			rectangle(imageResized, point1, point2, Scalar(RECTANGLE_RGB_COLOR), RECTANGLE_THICKNESS, RECTANGLE_LINE_TYPE, RECTANGLE_SHIFT);
+			// define top left point coordinates of rectangle
+			int topLeftPointX = faces[i].x;
+			int topLeftPointY = faces[i].y;
+			// define bottom right coordinates of rectangle (position relative to top left point coordinates)
+			int bottomRightPointX = topLeftPointX + faces[i].height;
+			int bottomRightPointY = topLeftPointY + faces[i].width;		
+			// define top left point of rectangle
+			Point topLeftPoint(topLeftPointX, topLeftPointY);	// faces[i].tl()
+			// define bottom right point of rectangle
+			Point bottomRightPoint(bottomRightPointX, bottomRightPointY);	// faces[i].br()
+			rectangle(
+				imageResized,
+				topLeftPoint,
+				bottomRightPoint,
+				Scalar(RECTANGLE_RGB_COLOR),
+				RECTANGLE_THICKNESS,
+				RECTANGLE_LINE_TYPE,
+				RECTANGLE_SHIFT
+			);
 		}
 
 		cout << "showing image..." << endl;

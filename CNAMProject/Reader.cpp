@@ -10,12 +10,22 @@
 using namespace std;
 using namespace cv;
 
-
-
-
 #define INFINITE_WAIT_TIME 0
 
 #define DEFAULT_PROMPT_MESSAGE "Enter your file path: "
+
+#define RECTANGLE_RGB_COLOR 255, 0, 0
+#define RECTANGLE_THICKNESS 2
+#define RECTANGLE_LINE_TYPE 8
+#define RECTANGLE_SHIFT 0
+
+#ifdef __unix__         
+	#define FACE_DEFINITION "Resources/haarcascade_frontalface_default.xml"
+	#define OUTPUT_FILE "output/output.jpg"
+#elif defined(_WIN32) || defined(WIN32) 
+	#define FACE_DEFINITION "Resources\\haarcascade_frontalface_default.xml"
+	#define OUTPUT_FILE "output\\output.jpg"
+#endif
 
 
 /*	<summary>
@@ -63,40 +73,84 @@ bool isValid(Mat image) {
 	</summary>
  */
 int main(void) {
-	string imagePath = getPathFromUser();
-	Mat image = openImage(imagePath);
+	bool shutDownProgram = false;
+	do {
+		bool imageIsValid;
+		do {
+			string imagePath = getPathFromUser();
+			Mat image = openImage(imagePath);
 
-	if (isValid(image)) {
-		cout << "Could not read the image from the specified path : " << imagePath << std::endl;
-		return EXIT_FAILURE;
-	}
+			imageIsValid = isValid(image);
 
-	cout << "Reading the image from the specified path : " << imagePath << std::endl;
+			if (imageIsValid) {
+				cout << "Image read successfully from the specified path : " << imagePath << endl;
+			} else {
+				cout << "Could not read the image from the specified path : " << imagePath << endl;
+				cout << "try again !" << endl;
+			}
 
-	Mat imageResized;
+		} while (!imageIsValid);
 
-	cout << image.size() << endl;
+		cout << "Reading the image from the specified path : " << imagePath << endl;
 
-	resize(image, imageResized, Size(), 0.5, 0.5);
+		Mat imageResized;
 
-	CascadeClassifier faceCascade;
-	faceCascade.load("Resources/haarcascade_frontalface_default.xml");
+		cout << "resizing the image ..."
+		cout << "image original size : " << endl;
+		cout << image.size() << endl;
 
-	if (faceCascade.empty()) { cout << "xml file not loaded" << endl; }
+		resize(image, imageResized, Size(), 0.5, 0.5);
 
-	vector<Rect> faces;
-	faceCascade.detectMultiScale(imageResized, faces, 1.1, 10);
+		cout << "image size after resize : " << endl;
+		cout << image.size() << endl;
 
-	int numberOfFaces = faces.size();
+		cout << "processing for face detection..." << endl;
 
-	cout << "number of faces = " << numberOfFaces;
+		CascadeClassifier faceCascade;
+		faceCascade.load(FACE_DEFINITION);
+		
+		if (faceCascade.empty()) {
+			cout << "xml file not loaded proprely" << endl;
+			exit(EXIT_FAILURE);	// stdlib.h
+		}
 
-	for (int i = 0; i < numberOfFaces; i++) {
-		rectangle(imageResized, faces[i].tl(), faces[i].br(), Scalar(255, 0, 0));
-	}
+		vector<Rect> faces;
+		faceCascade.detectMultiScale(imageResized, faces, 1.1, 10);
 
-	showImage(imageResized);
+		int numberOfFaces = faces.size();
 
+		cout << "number of faces detected : " << numberOfFaces << endl;
 
-	return EXIT_SUCCESS;
+		cout << "processing for drawing rectangles on faces..." << endl;
+		for (int i = 0; i < numberOfFaces; i++) {
+			Point point1(faces[i].x, faces[i].y);	// faces[i].tl()
+			Point point2((faces[i].x + faces[i].height), (faces[i].y + faces[i].width));	// faces[i].br()
+			rectangle(imageResized, point1, point2, Scalar(RECTANGLE_RGB_COLOR), RECTANGLE_THICKNESS, RECTANGLE_LINE_TYPE, RECTANGLE_SHIFT);
+		}
+
+		cout << "showing image..." << endl;
+		cout << "Press any key to close the image's window..." << endl;
+
+		showImage("multiple face detector app", imageResized);
+
+		cout << "image shown" << endl;
+
+		cout << "outputing image to file..." << endl;
+
+		iwrite(OUTPUT_FILE, imageResized);
+
+		cout << "image outputed successfully !" << endl;
+
+		char* quitKey = "q"; 
+		cout << "Press q to exit the program or any key to process another image" << endl;
+		cin >> userChoice;
+		if(strcmp(userChoice, quitKey) == 0) {
+			cout << "exiting program..." << endl;
+			shutDownProgram = true;
+		} else {
+			cout << "let's go for another image face detection !" << endl;	
+		}
+	} while(!shutDownProgram);
+	
+	return EXIT_SUCCESS;	// stdlib.h
 }

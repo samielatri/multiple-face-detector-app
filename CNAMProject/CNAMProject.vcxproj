@@ -144,6 +144,23 @@
   <ItemGroup>
     <ClCompile Include="Reader.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="image.h" />
+    <ClInclude Include="model.h" />
+    <ClInclude Include="prompt.h" />
+    <ClInclude Include="rectangle.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\img\man-and-woman.png" />
+    <Image Include="Resources\img\multiple-faces.png" />
+    <Image Include="Resources\img\multiple-with-children.png" />
+    <Image Include="Resources\img\no-face.jpg" />
+    <Image Include="Resources\img\one-face-man.png" />
+    <Image Include="Resources\img\one-face-woman.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Resources\model\haarcascade_frontalface_default.xml" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

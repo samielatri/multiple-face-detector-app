@@ -1,10 +1,13 @@
 #include <iostream>
 #include <stdlib.h>
+#include <stdio.h>
 
-#include <opencv2/imgcodecs.hpp>
-#include <opencv2/highgui.hpp>
-#include <opencv2/imgproc.hpp>
-#include <opencv2/objdetect.hpp>
+
+#include<string.h>
+
+#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
+#include <opencv2/objdetect/objdetect.hpp>
 
 #include "rectangle.h"
 #include "model.h"
@@ -51,20 +54,24 @@ void showImage(Mat image) {
 	</summary>
  */
 bool isValid(Mat image) {
-	return image.empty();
+	return !(image.empty());
 }
 
 /*	<summary>
 		main entry of the program
 	</summary>
  */
+
+
 int main(void) {
 	bool shutDownProgram = false;
 	do {
 		bool imageIsValid;
+		string imagePath;
+		Mat image;
 		do {
-			string imagePath = getPathFromUser();
-			Mat image = openImage(imagePath);
+			imagePath = getPathFromUser();
+			image = openImage(imagePath);
 
 			imageIsValid = isValid(image);
 
@@ -80,35 +87,31 @@ int main(void) {
 
 		Mat imageResized;
 
-		cout << "resizing the image ..."
+		cout << "resizing the image ..." << endl;
 		cout << "image original size : " << endl;
 		cout << image.size() << endl;
 
-		resize(
-			image,
-			imageResized,
-			Size(),
-			X_SCALING_FACTOR,
-			Y_SCALING_FACTOR
-		);
-
-		cout << "image size after resize : " << endl;
-		cout << image.size() << endl;
+		
 
 		cout << "processing for face detection..." << endl;
 
 		CascadeClassifier faceCascade;
+
 		faceCascade.load(FACE_DEFINITION);
 		
 		if (faceCascade.empty()) {
 			cout << "xml file not loaded proprely" << endl;
 			exit(EXIT_FAILURE);	// stdlib.h
 		}
-
+		
+		Mat imageGray;
+		// convert image to grayscale
+		cvtColor(image, imageGray, COLOR_BGR2GRAY);
+		
 		vector<Rect> faces;
-		faceCascade.detectMultiScale(imageResized, faces);
+		faceCascade.detectMultiScale(imageGray, faces);
 
-		int numberOfFaces = faces.size();
+		size_t numberOfFaces = faces.size();
 
 		cout << "number of faces detected : " << numberOfFaces << endl;
 
@@ -125,7 +128,7 @@ int main(void) {
 			// define bottom right point of rectangle
 			Point bottomRightPoint(bottomRightPointX, bottomRightPointY);	// faces[i].br()
 			rectangle(
-				imageResized,
+				image,
 				topLeftPoint,
 				bottomRightPoint,
 				Scalar(RECTANGLE_RGB_COLOR),
@@ -135,28 +138,49 @@ int main(void) {
 			);
 		}
 
+		
+		resize(
+			image,
+			imageResized,
+			Size(),
+			X_SCALING_FACTOR,
+			Y_SCALING_FACTOR
+		);
+
+
+		cout << "image size after resize : " << endl;
+		cout << imageResized.size() << endl;
+
 		cout << "showing image..." << endl;
 		cout << "Press any key to close the image's window..." << endl;
 
-		showImage("multiple face detector app", imageResized);
+		showImage(imageResized);
 
 		cout << "image shown" << endl;
 
 		cout << "outputing image to file..." << endl;
 
-		iwrite(OUTPUT_FILE, imageResized);
+		imwrite(OUTPUT_FILE, image);
 
 		cout << "image outputed successfully !" << endl;
 
-		char* quitKey = "q"; 
-		cout << "Press q to exit the program or any key to process another image" << endl;
-		cin >> userChoice;
-		if(strcmp(userChoice, quitKey) == 0) {
-			cout << "exiting program..." << endl;
-			shutDownProgram = true;
-		} else {
-			cout << "let's go for another image face detection !" << endl;	
-		}
+		
+		string userChoice;
+		do {
+			cout << "Press 'q' to exit the program or 'r' to process another image" << endl;
+			cin >> userChoice;
+			if (userChoice == "q") {
+				cout << "exiting program..." << endl;
+				shutDownProgram = true;
+			}
+			else if (userChoice == "r") {
+				cout << "let's go for another image face detection !" << endl;
+			}
+			else {
+				cout << "invalid entry please try again" << endl;
+			}
+		} while (userChoice != "q" && userChoice != "r");
+	
 	} while(!shutDownProgram);
 	
 	return EXIT_SUCCESS;	// stdlib.h

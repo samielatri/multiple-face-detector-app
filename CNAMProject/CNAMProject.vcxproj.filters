@@ -13,10 +13,58 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\Resources">
+      <UniqueIdentifier>{11eec2c5-701c-4d9b-9875-e3ee502c3400}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Resources\model">
+      <UniqueIdentifier>{3755bebf-2c8c-4c17-bf5f-8c3e4126316c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Resources\img">
+      <UniqueIdentifier>{3a535038-fb49-4350-93f5-5f6a95de9ad1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Reader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="image.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="model.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="prompt.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rectangle.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\img\man-and-woman.png">
+      <Filter>Source Files\Resources\img</Filter>
+    </Image>
+    <Image Include="Resources\img\multiple-faces.png">
+      <Filter>Source Files\Resources\img</Filter>
+    </Image>
+    <Image Include="Resources\img\multiple-with-children.png">
+      <Filter>Source Files\Resources\img</Filter>
+    </Image>
+    <Image Include="Resources\img\no-face.jpg">
+      <Filter>Source Files\Resources\img</Filter>
+    </Image>
+    <Image Include="Resources\img\one-face-man.png">
+      <Filter>Source Files\Resources\img</Filter>
+    </Image>
+    <Image Include="Resources\img\one-face-woman.png">
+      <Filter>Source Files\Resources\img</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Resources\model\haarcascade_frontalface_default.xml">
+      <Filter>Source Files\Resources\model</Filter>
+    </Xml>
   </ItemGroup>
 </Project>

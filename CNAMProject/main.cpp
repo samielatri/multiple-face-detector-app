@@ -29,12 +29,12 @@ using namespace cv;
 
 
 
-/*	
+/*
  *	main entry of the program
  */
 int main(void) {
 	CascadeClassifier faceCascade;
-	
+
 	if (!initializeFaceClassifier(&faceCascade)) {
 		cout << "xml model file not loaded proprely" << endl;
 		exit(EXIT_FAILURE);	// stdlib.h
@@ -50,21 +50,21 @@ int main(void) {
 		string imagePath;
 
 		do {
-			imagePath = getImagePathFromUser();
-			pathIsNotImage = !isPathImage(imagePath);
-			if (pathIsNotImage) {
-				cout << "The specified path is not a .jpg file : " << imagePath << "\ntry again !" << endl;
-			}
-		} while (pathIsNotImage);
+			do {
+				imagePath = getImagePathFromUser();
+				pathIsNotImage = !isPathImage(imagePath);
+				if (pathIsNotImage) {
+					cout << "The specified path is not a .jpg file : " << imagePath << "\ntry again !" << endl;
+				}
+			} while (pathIsNotImage);
 
-		do {
 			image = openImage(imagePath);
 			imageIsValid = isValidImage(image);
 
 			if (imageIsValid) {
 				cout << "Image read successfully from the specified path : " << imagePath << endl;
 			} else {
-				cout << "Could not read the image from the specified path : " << imagePath << "\ntry again !" << endl;
+				cout << "Could not read the image from the specified path : " << imagePath << endl;
 			}
 		} while (!imageIsValid);
 
@@ -73,7 +73,7 @@ int main(void) {
 		cout << "number of faces detected : " << drawCircles(&image, faces) << endl;
 		showImage(&image);
 	} while(getRepeat());
-	
+
 	cout << "exiting program..." << endl;
 
 	return EXIT_SUCCESS;	// stdlib.h

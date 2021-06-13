@@ -24,7 +24,19 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Reader.cpp">
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="prompt.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="model.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="image.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="circle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -38,7 +50,7 @@
     <ClInclude Include="prompt.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="rectangle.h">
+    <ClInclude Include="circle.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

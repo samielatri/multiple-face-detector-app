@@ -142,13 +142,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Reader.cpp" />
+    <ClCompile Include="circle.cpp" />
+    <ClCompile Include="image.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="model.cpp" />
+    <ClCompile Include="prompt.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="image.h" />
     <ClInclude Include="model.h" />
     <ClInclude Include="prompt.h" />
-    <ClInclude Include="rectangle.h" />
+    <ClInclude Include="circle.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\img\man-and-woman.png" />

@@ -1,0 +1,5 @@
+D:\workspace\studies\cnam\datascience\l1\s2\intorduction-to-programming-with-c-and-c++\final-project\CNAMProject\CNAMProject\Resources\img\man-and-woman.jpg
+D:\workspace\studies\cnam\datascience\l1\s2\intorduction-to-programming-with-c-and-c++\final-project\CNAMProject\CNAMProject\Resources\img\multiple-with-children.jpg
+D:\workspace\studies\cnam\datascience\l1\s2\intorduction-to-programming-with-c-and-c++\final-project\CNAMProject\CNAMProject\Resources\img\no-face.jpg
+D:\workspace\studies\cnam\datascience\l1\s2\intorduction-to-programming-with-c-and-c++\final-project\CNAMProject\CNAMProject\Resources\img\one-face-man.jpg
+D:\workspace\studies\cnam\datascience\l1\s2\intorduction-to-programming-with-c-and-c++\final-project\CNAMProject\CNAMProject\Resources\img\one-face-woman.jpg

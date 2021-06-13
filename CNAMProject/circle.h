@@ -3,7 +3,7 @@
 #ifndef _CIRCLE_H_
 #define _CIRCLE_H_
 
-#define CIRCLE_THICKNESS 4
+#define CIRCLE_THICKNESS 2
 #define CIRCLE_RGB_COLOR 0, 255, 0
 
 #include <opencv2/imgproc/imgproc.hpp>
@@ -21,7 +21,7 @@ int getRadius(int diameter);
 /*
  *	put characterstics of circle in circleCenter and circleRadius.
  */
-void getCircleCharacteristics(Rect** face, Point circleCenter, int* circleRadiu);
+void getCircleCharacteristics(Rect** face, Point* circleCenter, int* circleRadius);
 
 /*
  *	draw circle for face in image.

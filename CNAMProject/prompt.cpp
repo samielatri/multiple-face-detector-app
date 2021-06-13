@@ -54,8 +54,8 @@ bool endsWithCaseInsensitive(string mainStr, string toMatch) {
 	auto it = toMatch.begin();
 	return mainStr.size() >= toMatch.size() &&
 		all_of(next(mainStr.begin(), mainStr.size() - toMatch.size()), mainStr.end(), [&it](const char& c) {
-		return tolower(c) == tolower(*(it++));
-			});
+			return tolower(c) == tolower(*(it++));
+		});
 }
 
 /* end of  prompt.cpp */

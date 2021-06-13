@@ -22,12 +22,12 @@ Mat openImage(String imagePath);
  *	show image passed as a Mat object parameter
  *	return Mat object representing the opened image
  */
-void showImage(Mat image);
+void showImage(Mat* image);
 
 /*
  *	resize image passed by parameter.
  */
-void resizeImage(Mat image);
+void resizeImage(Mat** image);
 
 /*
  *	return true if image is valid, false if not.

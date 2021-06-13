@@ -20,9 +20,8 @@ bool initializeFaceClassifier(CascadeClassifier* faceCascade) {
 /*
  *	detected faces and put them in faces.
  */
-void detectFaces(Mat* image, vector<Rect> faces, CascadeClassifier faceCascade) {
-	Mat grayImage = getGrayScaleImage(*image);
-	faceCascade.detectMultiScale(grayImage, faces);
+void detectFaces(Mat image, vector<Rect>* faces, CascadeClassifier faceCascade) {
+	faceCascade.detectMultiScale(image, *faces);
 }
 
 /*
@@ -35,10 +34,12 @@ size_t getNumberOfFaces(vector<Rect> faces) {
 /*
  *  convert the copy of image to grayscale and return it.
  */
-Mat getGrayScaleImage(Mat image) {
+/*
+Mat* getGrayScaleImage(Mat image) {
 	Mat imageGray;
 	cvtColor(image, imageGray, COLOR_BGR2GRAY);
-	return imageGray;
+	return &imageGray;
 }
+*/
 
 /* end of model.cpp */

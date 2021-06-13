@@ -20,17 +20,17 @@ Mat openImage(String imagePath) {
  *	show image passed as a Mat object parameter
  *	return Mat object representing the opened image
  */
-void showImage(Mat image) {
-	resizeImage(image);
-	imshow("image_display", image);
+void showImage(Mat* image) {
+	resizeImage(&image);
+	imshow("image_display", *image);
 	waitKey(INFINITE_WAIT_TIME);
 }
 
 /*
  *	resize image passed by parameter.
  */
-void resizeImage(Mat image) {
-	resize(image, image, Size(), X_SCALING_FACTOR, Y_SCALING_FACTOR);
+void resizeImage(Mat** image) {
+	resize(**image, **image, Size(), X_SCALING_FACTOR, Y_SCALING_FACTOR);
 }
 
 /*

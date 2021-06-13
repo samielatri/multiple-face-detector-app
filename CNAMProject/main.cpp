@@ -38,8 +38,7 @@ int main(void) {
 	if (!initializeFaceClassifier(&faceCascade)) {
 		cout << "xml model file not loaded proprely" << endl;
 		exit(EXIT_FAILURE);	// stdlib.h
-	}
-	else {
+	} else {
 		cout << "Welcome to Face detection App" << endl;
 	}
 
@@ -49,6 +48,7 @@ int main(void) {
 
 		Mat image;
 		string imagePath;
+
 		do {
 			imagePath = getImagePathFromUser();
 			pathIsNotImage = !isPathImage(imagePath);
@@ -56,6 +56,7 @@ int main(void) {
 				cout << "The specified path is not a .jpg file : " << imagePath << "\ntry again !" << endl;
 			}
 		} while (pathIsNotImage);
+
 		do {
 			image = openImage(imagePath);
 			imageIsValid = isValidImage(image);
@@ -68,9 +69,9 @@ int main(void) {
 		} while (!imageIsValid);
 
 		vector<Rect> faces;
-		detectFaces(&image, faces, faceCascade);
+		detectFaces(image, &faces, faceCascade);
 		cout << "number of faces detected : " << drawCircles(&image, faces) << endl;
-		showImage(image);
+		showImage(&image);
 	} while(getRepeat());
 	
 	cout << "exiting program..." << endl;

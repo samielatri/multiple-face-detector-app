@@ -24,7 +24,7 @@ bool initializeFaceClassifier(CascadeClassifier* faceCascade);
 /*
  *	detected faces and put them in faces.
  */
-void detectFaces(Mat* image, vector<Rect> faces, CascadeClassifier faceCascade);
+void detectFaces(Mat image, vector<Rect>* faces, CascadeClassifier faceCascade);
 
 /*
  *	return number of faces.
@@ -34,7 +34,7 @@ size_t getNumberOfFaces(vector<Rect> faces);
 /*
  *  convert the copy of image to grayscale and return it.
  */
-Mat getGrayScaleImage(Mat image);
+Mat* getGrayScaleImage(Mat image);
 
 #endif  /* _MODEL_H_ */
 

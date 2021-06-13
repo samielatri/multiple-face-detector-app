@@ -4,9 +4,9 @@
 #define _MODEL_H_
 
 #ifdef __unix__         
-	#define FACE_DEFINITION "Resources/model/haarcascade_frontalface_default.xml"
+	#define FACE_DEFINITION "Resources/model/haarcascade_frontalface_alt2.xml"
 #elif defined(_WIN32) || defined(WIN32) 
-	#define FACE_DEFINITION "Resources\\model\\haarcascade_frontalface_default.xml"
+	#define FACE_DEFINITION "Resources\\model\\haarcascade_frontalface_alt2.xml"
 #endif /* __unix__ */
 
 #include <opencv2/objdetect/objdetect.hpp>
